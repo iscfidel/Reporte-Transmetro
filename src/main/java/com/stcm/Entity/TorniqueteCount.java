@@ -22,31 +22,62 @@ public class TorniqueteCount {
 
     @CsvBindByName(column = "fechaRegistro")
     private String fechaRegistro; // Temporalmente como String (ver nota abajo)o;
-	
-    public TorniqueteCount() {
+    
+    @CsvBindByName(column = "ContadorAuxiliar")
+    private long contadorAuxiliar;
+
+	public TorniqueteCount() {
     	
     }
 	
     // Getters y Setters
 
-    public long getEntradas() { return entradas; }
-    public void setEntradas(long entradas) { this.entradas = entradas; }
+    public long getEntradas() { 
+    	return entradas; 
+    }
+    
+    public void setEntradas(long entradas) { 
+    	this.entradas = entradas; 
+    }
 
-    public String getFechaContador() { return fechaContador; }
-    public void setFechaContador(String fechaContador) { this.fechaContador = fechaContador; }
+    public String getFechaContador() { 
+    	return fechaContador; 
+    }
+    public void setFechaContador(String fechaContador) { 
+    	this.fechaContador = fechaContador; 
+    }
 
-    public long getRealValue() { return realValue; }
-    public void setRealValue(long realValue) { this.realValue = realValue; }
+    public long getRealValue() { 
+    	return realValue; 
+    }
+    public void setRealValue(long realValue) { 
+    	this.realValue = realValue; 
+    }
 
     public int getEvaluar() { return evaluar; }
-    public void setEvaluar(int evaluar) { this.evaluar = evaluar; }
+    public void setEvaluar(int evaluar) { 
+    	this.evaluar = evaluar; 
+	}
 
-    public String getFechaRegistro() { return fechaRegistro; }
-    public void setFechaRegistro(String fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+    public String getFechaRegistro() { 
+    	return fechaRegistro; 
+    }
+    
+    public void setFechaRegistro(String fechaRegistro) { 
+    	this.fechaRegistro = fechaRegistro; 
+	}
+    
+    public long getContadorAuxiliar() {
+		return contadorAuxiliar;
+	}
+
+	public void setContadorAuxiliar(long contadorAuxiliar) {
+		this.contadorAuxiliar = contadorAuxiliar;
+	}
 
     @Override
     public String toString() {
-        return entradas + " | " + fechaContador + " | " + realValue + " | " + evaluar + " | " + fechaRegistro;
+        return entradas + " | " + fechaContador + " | " + realValue + " | " + evaluar + " | " + fechaRegistro + " | "+ contadorAuxiliar;
     }
 
     // ✅ Métodos para convertir fechas si lo deseas
