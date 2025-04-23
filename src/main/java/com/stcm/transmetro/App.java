@@ -1,46 +1,33 @@
 package com.stcm.transmetro;
 
-import java.util.ArrayList;
 import java.util.List;
-import com.stcm.Entity.*;
+import com.stcm.Entity.TorniqueteCount;
 import com.stcm.FilesEdit.CsvEdit;
+import com.stcm.Services.TorniqueteCountServices;
 
 public class App {
     
-	public static void main( String[] args ){
+	public static void main( String[] args ){ 
 		
-    	String rutaArchivo = "./testingCsv/torniquete_48.csv";
-
-        List<TorniqueteCount> datos = CsvEdit.leerCsvComoTorniquetes(rutaArchivo);
-        int size_csv = datos.size();
+		//Ruta del archivo "*.csv"...
+    	String path_file = "./testingCsv/torniquete_48.csv";
+    	
+    	//Lista en donde se almacenaran los registros de mi archivo csv...
+        List<TorniqueteCount> data = CsvEdit.leerCsvComoTorniquetes(path_file);
         
-        for (int i = 0; i < size_csv  - 1; i++) {
-        	//Variable para la posicion actual...
-        	TorniqueteCount value_act = datos.get(i);
-        	//Variable para la posicion siguiente...
-        	TorniqueteCount value_sig = datos.get(i+1);
-        	
-        	
-        	long entradas_act = value_act.getEntradas();
-        	long entradas_sig = value_sig.getEntradas();
-        	
-        	if(entradas_sig >= entradas_act && (entradas_sig - entradas_act) <= 50) {
-        		long diferencia = entradas_act + (entradas_sig - entradas_act);
-        		long contador_aux = value_sig.getContadorAuxiliar() + diferencia;
-        		value_act.setContadorAuxiliar(contador_aux);
-        	}
-        	else if(entradas_sig < entradas_act) {
-        		value_sig.setEntradas(entradas_act);
-        	}
-        	else if((entradas_sig - entradas_act) > 50) {
-        		value_sig.setEntradas(entradas_act);
-        	}
-        	
-		}
+        //Instacianmos el objeto de la clase "TorniqueteCountServices".
+        TorniqueteCountServices torniqueteServices = new TorniqueteCountServices(); 
         
-        for (TorniqueteCount torniqueteCount : datos) {
-			System.out.println(torniqueteCount);
-		}
+        //Estas variables son utilizadas  para inicializar el valor del primer registro del campo "Contador_Auxiliar"
+        TorniqueteCount tor = data.get(0);
+        long ini_auxCount = tor.getEntradas();
+        tor.setContadorAuxiliar(ini_auxCount);
+        
+        //Tamaño de la lista para utilizarlo en el for...
+        int size_csv = data.size();
+        
+        torniqueteServices.iterationRows(data, size_csv);
+        torniqueteServices.mostrarTorniquetes(data);
         
 	}
 	
