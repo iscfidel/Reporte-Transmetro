@@ -31,15 +31,5 @@ public class CsvEdit {
         }
     }
 
-    
-    /**
-     * Imprime el contenido de una lista de filas CSV.
-     *
-     * @param filas Lista de arrays de Strings (una por fila del archivo CSV)
-     */
-    public static void mostrarTorniquetes(List<TorniqueteCount> lista) {
-        for (TorniqueteCount item : lista) {
-            System.out.println(item.getEntradas());
-        }
-    }
+
 }
