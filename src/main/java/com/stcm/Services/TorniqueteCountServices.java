@@ -29,21 +29,21 @@ public class TorniqueteCountServices {
         	long contador_act = value_act.getContadorAuxiliar();
         	
             torniqueteServices.processValidation( entradas_act,  
-            		entradas_sig,  contador_act, contador_ant,  value_sig);
+            		entradas_sig,  contador_act, contador_ant,  value_sig, value_act);
         	
 		}
 	}
 	
-	public void processValidation(long entradas_act, long entradas_sig, long contador_act, long contador_ant, TorniqueteCount value_sig) {
+	public void processValidation(long entradas_act, long entradas_sig, long contador_act, long contador_ant, TorniqueteCount value_sig, TorniqueteCount value_act) {
 		long var_aux;
 		
 		//System.out.println("Actual: "+entradas_act+", Siguiente: "+entradas_sig+ ", Anterior: "+ contador_ant);
 		
     	if(entradas_sig >= entradas_act && (entradas_sig - entradas_act) <= 50) {
-    		addAuxCount(entradas_act, entradas_sig, contador_act, value_sig, contador_ant);
+    		addAuxCount(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant);
     		
     	}else if(entradas_sig <= entradas_act) { 
-    		addAuxCount(entradas_act, entradas_sig, contador_act, value_sig, contador_ant);
+    		addAuxCount(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant);
     		value_sig.setContadorAuxiliar(contador_act);
     		
     	}
@@ -51,10 +51,11 @@ public class TorniqueteCountServices {
     	//var_aux = entradas_act;
 	}
 	
-	public static void addAuxCount(long entradas_act, long entradas_sig, long contador_act, TorniqueteCount value_sig, long contador_ant) {
+	public static void addAuxCount(long entradas_act, long entradas_sig, long contador_act, TorniqueteCount value_sig,TorniqueteCount value_act , long contador_ant) {
 		
 			if(contador_act == 0) {
 				contador_act = contador_ant;
+				value_act.setContadorAuxiliar(contador_ant);
 			}
 			//Almacena la diferencia que hay entre el siguiente registro y el registro actual, para posteriormente
 			// ser sumado a la variable  actual.
@@ -65,6 +66,7 @@ public class TorniqueteCountServices {
 			
 			//Almacena el valor en la posicion correspondiente.
 			value_sig.setContadorAuxiliar(contador_aux);
+			value_act.setEvaluar(9999);
 			
 			diferencia = 0;
 		
