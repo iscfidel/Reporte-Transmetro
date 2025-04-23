@@ -10,8 +10,8 @@ public class App {
 	public static void main( String[] args ){ 
 		
 		//Ruta del archivo "*.csv"...
-    	String path_file = "./testingCsv/torniquete_48.csv";
-    	
+    	//String path_file = "./testingCsv/torniquete_48.csv";
+		String path_file = "./testingCsv/V1__torniquete_48.csv";
     	//Lista en donde se almacenaran los registros de mi archivo csv...
         List<TorniqueteCount> data = CsvEdit.leerCsvComoTorniquetes(path_file);
         
@@ -27,7 +27,10 @@ public class App {
         int size_csv = data.size();
         
         torniqueteServices.iterationRows(data, size_csv);
+        System.out.println("\t  ====================================================================================");
+        System.out.println("\t  | entradas | fechaContador | realValue | evaluar | fechaRegistro | contadorAuxiliar|");
         torniqueteServices.mostrarTorniquetes(data);
+        System.out.println("\t  ====================================================================================");
         
 	}
 	

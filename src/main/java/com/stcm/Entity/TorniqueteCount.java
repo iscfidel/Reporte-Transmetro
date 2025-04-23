@@ -77,7 +77,7 @@ public class TorniqueteCount {
 
     @Override
     public String toString() {
-        return entradas + " | " + fechaContador + " | " + realValue + " | " + evaluar + " | " + fechaRegistro + " | "+ contadorAuxiliar;
+        return "\t  | "+entradas + " | " + fechaContador + " | " + realValue + " | " + evaluar + " | " + fechaRegistro + "\t| \t"+ contadorAuxiliar+ " \t     | ";
     }
 
     // ✅ Métodos para convertir fechas si lo deseas
