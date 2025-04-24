@@ -9,7 +9,7 @@ import com.opencsv.bean.CsvBindByName;
 public class TorniqueteCount {
 	
     @CsvBindByName(column = "entradas")
-    private long entradas;  // Valor muy grande, mejor usar long
+    private long entradas;  
 
     @CsvBindByName(column = "fechaContador")
     private String fechaContador; // Temporalmente como String (ver nota abajo)
@@ -80,7 +80,7 @@ public class TorniqueteCount {
         return "\t  | "+entradas + " | " + fechaContador + " | " + realValue + " | " + evaluar + " | " + fechaRegistro + "\t| \t"+ contadorAuxiliar+ " \t     | ";
     }
 
-    // ✅ Métodos para convertir fechas si lo deseas
+    // Métodos para convertir fechas 
     public LocalDateTime getFechaContadorAsDateTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return LocalDateTime.parse(fechaContador, formatter);

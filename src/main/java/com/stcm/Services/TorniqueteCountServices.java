@@ -40,15 +40,15 @@ public class TorniqueteCountServices {
 	    	if(entradas_sig >= entradas_act && (entradas_sig - entradas_act) < 51) {
 	    		addAuxCountMin(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant, real_value_act);
 	    		
-	    	}else if(entradas_sig <= entradas_act) { 
-	    		addAuxCountMin(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant, real_value_act);			
+	    	}else if(entradas_sig <= entradas_act) {
+	    		addAuxCountMin(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant, real_value_act);
 	    		value_sig.setContadorAuxiliar(contador_act);
 	    		
 	    	}else if((entradas_sig-entradas_act) > 50) {
 	    		value_sig.setEntradas(entradas_act);
 	    		value_sig.setContadorAuxiliar(entradas_act);
+				value_act.setEvaluar(9999);
 	    	}
-    	
 	}
 	
 	private  void addAuxCountMin(long entradas_act, long entradas_sig, long contador_act, TorniqueteCount value_sig,
@@ -69,6 +69,11 @@ public class TorniqueteCountServices {
 			contador_aux = diferencia_cont;
 			//Almacena el valor en la posicion correspondiente.
 			value_sig.setContadorAuxiliar(contador_aux);
+			
+			if(entradas_sig == 0) {
+				value_sig.setEntradas(entradas_act);
+				
+			}
 			
 			value_act.setEvaluar(9999);
 			diferencia_cont = 0;    
