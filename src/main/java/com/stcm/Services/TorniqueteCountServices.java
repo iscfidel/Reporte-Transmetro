@@ -27,33 +27,43 @@ public class TorniqueteCountServices {
 	        	long entradas_sig = value_sig.getEntradas();
 	        	long contador_act = value_act.getContadorAuxiliar();
 	        	long real_value_act = value_act.getRealValue();
+	        	long real_value_sig = value_sig.getRealValue();
 	        	
-	            torniqueteServices.processValidation( entradas_act,  
-	            		entradas_sig,  contador_act, contador_ant,  value_sig, value_act,  real_value_act);
-	        	
+	            torniqueteServices.processValidationAccess( entradas_act,  
+	            		entradas_sig,  contador_act, contador_ant,  value_sig, value_act,  real_value_act,  real_value_sig );
+				//System.out.println("siguiente real value = "+ real_value_sig+" actual real value = "+real_value_act);
 			}
 	}
 	
-	private void processValidation(long entradas_act, long entradas_sig, long contador_act, long contador_ant, 
-		TorniqueteCount value_sig, TorniqueteCount value_act, long real_value_act) {
+	
+	public void processValidationRealValue(TorniqueteCount value_sig, TorniqueteCount value_act, 
+				long real_value_sig, long real_value_act) {
 		
-	    	if(entradas_sig >= entradas_act && (entradas_sig - entradas_act) < 51) {
-	    		addAuxCountMin(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant, real_value_act);
+		
+	}
+	
+	private void processValidationAccess(long entradas_act, long entradas_sig, long contador_act, long contador_ant, 
+				TorniqueteCount value_sig, TorniqueteCount value_act, long real_value_act, long real_value_sig ) {
+		
+	    	if(entradas_sig > entradas_act && (entradas_sig - entradas_act) < 51) {
+	    		addAuxCount(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant, real_value_act);
 	    		
 	    	}else if(entradas_sig <= entradas_act) {
-	    		addAuxCountMin(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant, real_value_act);
-	    		value_sig.setContadorAuxiliar(contador_act);
-	    		
+	    		addAuxCount(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant, real_value_act);
+				value_sig.setContadorAuxiliar(contador_act);
+				value_sig.setRealValue(real_value_act);
+				
 	    	}else if((entradas_sig-entradas_act) > 50) {
 	    		value_sig.setEntradas(entradas_act);
+	    		value_sig.setRealValue(real_value_act);
 	    		value_sig.setContadorAuxiliar(entradas_act);
-				value_act.setEvaluar(9999);
+				value_act.setEvaluar(99999);
 	    	}
 	}
 	
-	private  void addAuxCountMin(long entradas_act, long entradas_sig, long contador_act, TorniqueteCount value_sig,
-			TorniqueteCount value_act , long contador_ant, long real_value_act) {
-		
+	private  void addAuxCount(long entradas_act, long entradas_sig, long contador_act, TorniqueteCount value_sig,
+				  TorniqueteCount value_act , long contador_ant, long real_value_act) {
+			
 			if(contador_act == 0) {
 				contador_act = contador_ant;
 				value_act.setContadorAuxiliar(contador_ant);
@@ -62,22 +72,29 @@ public class TorniqueteCountServices {
 			//Almacena la diferencia que hay entre el siguiente registro y el registro actual, para posteriormente
 			// ser sumado a la variable  actual.
 			long diferencia_cont = contador_act + (entradas_sig - entradas_act);
+			long diferencia_real_value = real_value_act + (entradas_sig - entradas_act);
+			
 			long contador_aux;
+			long real_value_aux;
 			
 			//Se suma el valor de la posicion actual de la columna "ContadorAuxiliar"
 			//contador_aux = value_sig.getContadorAuxiliar() + diferencia_cont;					
 			contador_aux = diferencia_cont;
+			
+			real_value_aux = diferencia_real_value;
+			
+			
 			//Almacena el valor en la posicion correspondiente.
 			value_sig.setContadorAuxiliar(contador_aux);
 			
+			value_sig.setRealValue(diferencia_real_value);
+			
 			if(entradas_sig == 0) {
 				value_sig.setEntradas(entradas_act);
-				
 			}
 			
-			value_act.setEvaluar(9999);
+			value_act.setEvaluar(99999);
 			diferencia_cont = 0;    
-			
 	}
 	
     public void mostrarTorniquetes(List<TorniqueteCount> list) {
