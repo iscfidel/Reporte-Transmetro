@@ -45,7 +45,7 @@ public class TorniqueteCountServices {
 	private void processValidationAccess(long entradas_act, long entradas_sig, long contador_act, long contador_ant, 
 				TorniqueteCount value_sig, TorniqueteCount value_act, long real_value_act, long real_value_sig ) {
 		
-	    	if(entradas_sig > entradas_act && (entradas_sig - entradas_act) < 51) {
+	    	if(entradas_sig > entradas_act && (entradas_sig - contador_act) < 51) {
 	    		addAuxCount(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant, real_value_act);
 	    		
 	    	}else if(entradas_sig <= entradas_act) {
@@ -53,11 +53,10 @@ public class TorniqueteCountServices {
 				value_sig.setContadorAuxiliar(contador_act);
 				value_sig.setRealValue(real_value_act);
 				
-	    	}else if((entradas_sig-entradas_act) > 50) {
-	    		value_sig.setEntradas(entradas_act);
+	    	}else if((entradas_sig-contador_act) > 50) {
+	    		//value_sig.setEntradas(entradas_act);
 	    		value_sig.setRealValue(real_value_act);
-	    		value_sig.setContadorAuxiliar(entradas_act);
-				value_act.setEvaluar(99999);
+	    		value_sig.setContadorAuxiliar(contador_act);
 	    	}
 	}
 	
@@ -93,7 +92,6 @@ public class TorniqueteCountServices {
 				value_sig.setEntradas(entradas_act);
 			}
 			
-			value_act.setEvaluar(99999);
 			diferencia_cont = 0;    
 	}
 	
