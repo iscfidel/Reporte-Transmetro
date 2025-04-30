@@ -1,2 +1,4 @@
-com/stcm/transmetro/App.class
-com/stcm/FilesEdit/CsvEdit.class
+com\stcm\FilesEdit\CsvEdit.class
+com\stcm\Services\TorniqueteCountServices.class
+com\stcm\Entity\TorniqueteCount.class
+com\stcm\transmetro\App.class

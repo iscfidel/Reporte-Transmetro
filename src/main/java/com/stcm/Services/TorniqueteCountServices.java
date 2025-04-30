@@ -6,6 +6,7 @@ import com.stcm.Entity.TorniqueteCount;
 
 public class TorniqueteCountServices {
 	
+	//Metodo para recorrer toda la lista con los datos extraidos de nuestro archivo ".csv"...
 	public void iterationRows(List<TorniqueteCount> data, int size_csv) {
 		TorniqueteCountServices torniqueteServices = new TorniqueteCountServices();
 		
@@ -14,9 +15,10 @@ public class TorniqueteCountServices {
 	        	TorniqueteCount value_act = data.get(i);
 	        	TorniqueteCount value_sig = data.get(i+1);
 	            TorniqueteCount value_ant = null;
+	            //Variable para tomar el valor de una posicion anterior...
 	            long contador_ant = 0;
 	            
-		            // Solo obtenemos el valor anterior si no estamos en la primera posición
+		            // Solo obtenemos el valor anterior si no estamos en la primera posición...
 		            if (i > 0) {
 		                value_ant = data.get(i-1);
 		                contador_ant = value_ant.getContadorAuxiliar();
@@ -30,21 +32,14 @@ public class TorniqueteCountServices {
 	        	long real_value_sig = value_sig.getRealValue();
 	        	
 	            torniqueteServices.processValidationAccess( entradas_act,  
-	            		entradas_sig,  contador_act, contador_ant,  value_sig, value_act,  real_value_act,  real_value_sig );
-				//System.out.println("siguiente real value = "+ real_value_sig+" actual real value = "+real_value_act);
-			}
+	            		entradas_sig,  contador_act, contador_ant,  value_sig, value_act,  real_value_act,  real_value_sig );			}
 	}
 	
-	
-	public void processValidationRealValue(TorniqueteCount value_sig, TorniqueteCount value_act, 
-				long real_value_sig, long real_value_act) {
-		
-		
-	}
-	
+	//Verifica las entradas y en base a sus resultados toma decisiones...
 	private void processValidationAccess(long entradas_act, long entradas_sig, long contador_act, long contador_ant, 
 				TorniqueteCount value_sig, TorniqueteCount value_act, long real_value_act, long real_value_sig ) {
 		
+		//Si nuestros valores cumplen nuestras reglas establecidas realizan sus calculos correspondientes...
 	    	if(entradas_sig > entradas_act && (entradas_sig - entradas_act) < 51) {
 	    		if((entradas_sig - contador_act) < 51) {
 	    			addAuxCount(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant, real_value_act);
@@ -52,26 +47,25 @@ public class TorniqueteCountServices {
 					value_sig.setContadorAuxiliar(contador_act);
 					value_sig.setRealValue(real_value_act);
 	    		}
-	    		
-	    	}else if(entradas_sig <= entradas_act) {
-	    		//addAuxCount(entradas_act, entradas_sig, contador_act, value_sig, value_act, contador_ant, real_value_act);
+	    	
+	    	}else if(entradas_sig <= entradas_act) { //Si entra a esta decision sustituye los valores de las variables por...
 				value_sig.setContadorAuxiliar(contador_act);
 				value_sig.setRealValue(real_value_act);
 				
 	    	}else if((entradas_sig-entradas_act) > 50) {
-	    		//value_sig.setEntradas(entradas_act);
 	    		value_sig.setContadorAuxiliar(contador_act);
 	    		value_sig.setRealValue(real_value_act);
 	    	}
 	}
 	
+	//Metodo para realizar el calculo del real value y contador auxiliar
 	private  void addAuxCount(long entradas_act, long entradas_sig, long contador_act, TorniqueteCount value_sig,
 				  TorniqueteCount value_act , long contador_ant, long real_value_act) {
 			
 			if(contador_act == 0) {
 				contador_act = contador_ant;
 				value_act.setContadorAuxiliar(contador_ant);
-			} //??????????? 
+			}
 			
 			//Almacena la diferencia que hay entre el siguiente registro y el registro actual, para posteriormente
 			// ser sumado a la variable  actual.
@@ -82,11 +76,9 @@ public class TorniqueteCountServices {
 			long real_value_aux;
 			
 			//Se suma el valor de la posicion actual de la columna "ContadorAuxiliar"
-			//contador_aux = value_sig.getContadorAuxiliar() + diferencia_cont;					
 			contador_aux = diferencia_cont;
 			
 			real_value_aux = diferencia_real_value;
-			
 			
 			//Almacena el valor en la posicion correspondiente.
 			value_sig.setContadorAuxiliar(contador_aux);

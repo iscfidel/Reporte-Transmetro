@@ -49,8 +49,8 @@ public class CsvEdit {
 	            "entradas",
 	            "fechaContador",
 	            "realValue",
-	            "evaluar",
-	            "fechaRegistro",
+	            //"evaluar",
+	            //"fechaRegistro",
 	            "contadorAuxiliar"
 	        );
 

@@ -16,19 +16,11 @@ public class TorniqueteCount {
 
     @CsvBindByName(column = "RealValue")
     private long realValue;
-
-    @CsvBindByName(column = "Evaluar")
-    private int evaluar;
-
-    @CsvBindByName(column = "fechaRegistro")
-    private String fechaRegistro; // Temporalmente como String (ver nota abajo)o;
     
     @CsvBindByName(column = "ContadorAuxiliar")
     private long contadorAuxiliar;
 
-	public TorniqueteCount() {
-    	
-    }
+    public TorniqueteCount() {}
 	
     // Getters y Setters
 
@@ -53,19 +45,6 @@ public class TorniqueteCount {
     public void setRealValue(long realValue) { 
     	this.realValue = realValue; 
     }
-
-    public int getEvaluar() { return evaluar; }
-    public void setEvaluar(int evaluar) { 
-    	this.evaluar = evaluar; 
-	}
-
-    public String getFechaRegistro() { 
-    	return fechaRegistro; 
-    }
-    
-    public void setFechaRegistro(String fechaRegistro) { 
-    	this.fechaRegistro = fechaRegistro; 
-	}
     
     public long getContadorAuxiliar() {
 		return contadorAuxiliar;
@@ -77,7 +56,7 @@ public class TorniqueteCount {
 
     @Override
     public String toString() {
-        return "\t  | "+entradas + " | " + fechaContador + " | " + realValue + " | " + evaluar + " | " + fechaRegistro + " | "+ contadorAuxiliar+ " \t     | ";
+        return "\t  | "+entradas + "   |" + fechaContador + "|    " + realValue + "     |        "+ contadorAuxiliar + "        |";
     }
 
     // Métodos para convertir fechas 
@@ -85,12 +64,5 @@ public class TorniqueteCount {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return LocalDateTime.parse(fechaContador, formatter);
     }
-
-    public LocalDateTime getFechaRegistroAsDateTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return LocalDateTime.parse(fechaRegistro, formatter);
-    }
 	
-	
-
 }
