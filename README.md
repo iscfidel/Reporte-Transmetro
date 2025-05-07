@@ -1,5 +1,5 @@
 
-# unknown_0ne
+# Reporteador Transmetro
 this is a report for the access of  bus in station "Talleres".
 
 # Desarrollador: iscfidel
@@ -18,4 +18,9 @@ this is a report for the access of  bus in station "Talleres".
 #
 #https://www.eclipse.org/downloads/
 #
+# 2- Ambientar proyecto.
+#Importar nuestro proyecto dentro de la IDE de eclipse. Realizar en la opcion de Maven un 'Update Project'.
+#Limipiar y instalar los paquetes de maven con "Maven Clean & Maven Install".
+#
+# 3 - Ejecutar Proyecto.
 
